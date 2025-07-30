@@ -19,16 +19,48 @@
 
 </head>
 <body>
-   <center>
-<br>
-<br>
-    <a href="#" onclick="document.getElementById('lamba').src = 'lamba_acik.jpg'">Açma</a>
-    <a href="#" onclick="document.getElementById('lamba').src = 'lamba_kapali.jpg'">Kapama</a>
-<br>
-<br>
-<br>
+    <br>
+    <a href="#" onclick="resimDegistir()">Açma/Kapama</a>
+    <br>
+    <br>
+    <br>
+    <a href="#" onclick="renkDegistir()">Renk Değiştir</a>
+    <br>
+    <br>
+    <br>
+    <img id="lamba" src="lamba_kapali.jpg" width="400" height="500">
+    
+    <script>
+      let aktifResim = 1;
+let renkIndex = 0;
 
-    <img id="lamba" src="lamba_kapali.jpg">
-   </center>
+    // Renkli resim dizisi 
+    const renkliResimler = ["lamba_acik.jpg", "lamba_mavi.jpg", "lamba_kirmizi.jpg"];
+    function resimDegistir() {
+      const img = document.getElementById("lamba");
+if (aktifResim === 1) {
+        img.src = renkliResimler[0]; // ışığı aç (ilk resim)
+        aktifResim = 2;
+        renkIndex = 0;
+      } else {
+        img.src = "lamba_kapali.jpg";
+        aktifResim = 1;
+      }
+    }
+
+    function renkDegistir() {
+      const img = document.getElementById("lamba");
+
+      // Eğer ışık kapalıysa renk değiştirme çalışmasın
+      if (aktifResim !== 2) return;
+
+      // 4 veya daha fazla resim varsa değişiklik yapılmasın
+      if (renkliResimler.length >= 4) return;
+
+      // Sıradaki renge geç
+      renkIndex = (renkIndex + 1) % renkliResimler.length;
+      img.src = renkliResimler[renkIndex];
+    }
+    </script>
 </body>
 </html>
